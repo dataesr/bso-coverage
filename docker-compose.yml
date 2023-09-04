@@ -1,0 +1,7 @@
+version: '3.3'
+services:
+  mongo:
+    ports:
+      - '27017:27017'
+    restart: always
+    image: mongo
