@@ -5,18 +5,21 @@ Check coverage of the French Open Science Monitor against OpenAlex
 `docker compose up --build`
 
 
-## Result
+## Results
 
 2023-09-17
-- Publications in DB : 2730748
-- Publications FR in FOSM : 1825580
-- Publications from FOSM in DB : 1825580 (i.e. 67 % of the DB)
-- Publications FR in OpenAlex : 1874618
-- Publication from OpenAlex in DB : 1876028 (i.e. 69 % of the DB)
-- Publications from FOSM and OpenAlex in DB : 970860 (i.e. 36 % of the DB)
+- Publications in DB : 2 730 748
+- Publications FR in FOSM : 1 825 580
+- Publications from FOSM in DB : 1 825 580 (i.e. 67 % of the DB)
+- Publications FR in OpenAlex : 1 874 618
+- Publication from OpenAlex in DB : 1 876 028 (i.e. 69 % of the DB)
+- Publications from FOSM and OpenAlex in DB : 970 860 (i.e. 36 % of the DB)
 
 
-## 20 DOIs from OpenAlex missing in FOSM
+## Diagnostic
+
+
+### 20 DOI of publications from OpenAlex missing in FOSM
 
 - 10.1136/bmj.n71
 - 10.3156/jsoft.29.5_177_2
@@ -40,7 +43,20 @@ Check coverage of the French Open Science Monitor against OpenAlex
 - 10.1109/sp.2017.41
 
 
-## 20 DOIs from FOSM missing in OpenAlex
+### Repartition by year of publications from OpenAlex missing in FOSM
+
+{'year': 2013, 'count': 93350}
+{'year': 2014, 'count': 97617}
+{'year': 2015, 'count': 101106}
+{'year': 2016, 'count': 105931}
+{'year': 2017, 'count': 106200}
+{'year': 2018, 'count': 106025}
+{'year': 2019, 'count': 114482}
+{'year': 2020, 'count': 88065}
+{'year': 2021, 'count': 94701}
+
+
+## 20 DOI of publications from FOSM missing in OpenAlex
 
 - hal-03367555
 - anses-03367620
