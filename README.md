@@ -42,6 +42,29 @@ Check coverage of the French Open Science Monitor against OpenAlex
 - 10.1056/nejmoa1215734
 - 10.1109/sp.2017.41
 
+### 20 DOI of publications from OpenAlex missing in FOSM from 2021
+
+- 10.1136/bmj.n71
+- 10.1016/j.ijsu.2021.105906
+- 10.1056/nejmoa2031054
+- 10.1097/ccm.0000000000005337
+- 10.1109/cvpr46437.2021.01212
+- 10.1016/j.frl.2020.101604
+- 10.1007/s00134-021-06368-4
+- 10.1074/jbc
+- 10.1039/d1cs00056j
+- 10.1056/nejmoa2108749
+- 10.1039/d0mh01985b
+- 10.15585/mmwr.mm7047e1
+- 10.1001/jama.2021.17272
+- 10.15585/mmwr.mm7003e1
+- 10.1039/d0mh01317j
+- 10.17705/1jais.00655
+- 10.4000/books.pul.34447
+- 10.15585/mmwr.mm7015e2
+- 10.1039/d0cs00556h
+- 10.21203/rs.3.rs-266574/v1
+
 
 ### Repartition by year of publications from OpenAlex missing in FOSM
 
