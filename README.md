@@ -67,16 +67,17 @@ Check coverage of the French Open Science Monitor against OpenAlex
 
 ### Reason for 200 publications from Open Alex for missing in FOSM
 
-| Reason | 20230921 | 20230923 |
-| ----------- | ----------- | --- |
-| No French affiliations detected in the BSO | 68 | 98 |
-| The landing page has not been downloaded | 56 | 0 |
-| No affiliations detected in the BSO | 30 | 37 |
-| DOI not indexed | 21 | 35 |
-| Unable to access DOI webpage | 16 | 16 |
-| Publication genre problem | 3 | 6 |
-| No publication year in Unpaywall | 1 | 1 |
-| Total | 195 | 193 |
+| Reason | 20230921 | 20230923 | 20231006 |
+| ----------- | ----------- | ----------- | ----------- |
+| No French affiliations detected in the BSO | 68 | 98 | 95 |
+| The landing page has not been downloaded | 56 | 0 | 7 |
+| No affiliations detected in the BSO | 30 | 37 | 36 |
+| DOI not indexed | 21 | 35 | 32 |
+| Unable to access DOI webpage | 16 | 16 | 16 |
+| Publication genre problem | 3 | 6 | 3 |
+| No publication year in Unpaywall | 1 | 1 | 1 |
+| Empty reason | 5 | 7 | 10 |
+| Total | 200 | 200 | 200 |
 
 
 ### Repartition by year of publications from OpenAlex missing in FOSM
