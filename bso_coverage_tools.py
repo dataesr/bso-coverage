@@ -89,15 +89,15 @@ class Error(Enum):
     MISMATCH_FRENCH_AFFILIATION = 19
 
 
-def state_str(state):
+def state_str(state: State) -> str:
     state_name = state.name if isinstance(state, State) else state
-    state_txt = STATES[state_name] if state_name in STATES else ""
+    state_txt = STATES[state_name] if state_name in STATES else f"Unknown state {state_name}"
     return state_txt
 
 
-def error_str(error: Error):
+def error_str(error: Error) -> str:
     error_name = error.name if isinstance(error, Error) else error
-    error_txt = ERRORS[error_name] if error_name in ERRORS else ""
+    error_txt = ERRORS[error_name] if error_name in ERRORS else f"Unknown error {error_name}"
     return error_txt
 
 
@@ -444,7 +444,7 @@ def analyse_from_openalex_work(
         dict | pd.Series: Result of analysis
     """
 
-    # Check input data
+    # Check input data type
     if isinstance(alex_work, pd.DataFrame) and pd.DataFrame.shape[0] == 1:
         alex_work = alex_work.squeeze()
     if isinstance(alex_work, dict):
@@ -452,9 +452,11 @@ def analyse_from_openalex_work(
     if not isinstance(alex_work, pd.Series):
         raise TypeError(f"Input should be {dict}, {pd.Series} or {pd.DataFrame} not {type(alex_work)}")
 
-    # Get publication DOI
+    # Check input data fields
     if "doi" not in alex_work:
         raise KeyError("'doi' key not found in input data")
+
+    # Get publication DOI
     doi = alex_work["doi"].removeprefix(ALEX_DOI_PREFIX)
 
     # Analyse work
@@ -463,12 +465,13 @@ def analyse_from_openalex_work(
     return result
 
 
-def analyse_from_openalex(alex_df: dict | pd.DataFrame, cli: bool = True) -> pd.DataFrame:
+def analyse_from_openalex(alex_df: dict | pd.DataFrame, cli: bool = True, as_pandas: bool = True) -> pd.DataFrame:
     """Coverage analysis of OpenAlex works
 
     Args:
         alex_df (dict | pd.DataFrame): OpenAlex works object.
         cli (bool, optional): Enable command line for swift calls. Defaults to True.
+        as_pandas (bool, optional): Return result as pd.DataFrame instead of dict. Defaults to True.
 
     Returns:
         pd.DataFrame: Results of analysis
@@ -484,6 +487,9 @@ def analyse_from_openalex(alex_df: dict | pd.DataFrame, cli: bool = True) -> pd.
     applied_df = alex_df.apply(
         lambda row: analyse_from_openalex_work(row, cli=cli, as_pandas=False), axis="columns", result_type="expand"
     )
+
+    if not as_pandas:
+        return applied_df.reset_index().to_dict()
 
     return applied_df.reset_index()
 
@@ -517,13 +523,16 @@ def analyse_from_doi(
     return result
 
 
-def analyse_from_dois(dois: str | list | pd.Series, openalex_api: bool = True, cli: bool = True) -> pd.DataFrame:
+def analyse_from_dois(
+    dois: str | list | pd.Series, openalex_api: bool = True, cli: bool = True, as_pandas: bool = True
+) -> pd.DataFrame:
     """Coverage analysis of works
 
     Args:
         dois (str | list | pd.Series): Works Digital Object Identifiers
         openalex_api (bool, optional): whether to check openalex api or not. Defaults to True.
         cli (bool, optional): Enable command line for swift calls. Defaults to True.
+        as_pandas (bool, optional): Return result as pd.DataFrame instead of list. Defaults to True.
 
     Returns:
         pd.DataFrame: Results of analysis
@@ -540,4 +549,7 @@ def analyse_from_dois(dois: str | list | pd.Series, openalex_api: bool = True, c
     # Apply analyse
     applied = list(map(lambda doi: analyse_from_doi(doi, cli=cli, as_pandas=False), dois))
 
-    return pd.DataFrame(applied).reset_index()
+    if as_pandas:
+        return pd.DataFrame(applied).reset_index()
+
+    return applied
