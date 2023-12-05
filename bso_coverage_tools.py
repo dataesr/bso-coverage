@@ -373,9 +373,12 @@ def analyse_work(
 
         # Check DOI
         if state == State.UNDEFINED:
-            error, error_data = analyse_doi(doi)
-            if error.value > Error.DOI_NO_ACCESS.value:
+            doi_error, doi_error_data = analyse_doi(doi)
+            if doi_error.value == Error.OK.value or doi_error.value > Error.DOI_NO_ACCESS.value:
                 state = State.DOI_FOUND
+            if doi_error.value > Error.OK.value:
+                error = doi_error
+                error_data = doi_error_data
 
     # Publication detected countries
     if error == Error.OK and state in [State.IN_FOSM]:
@@ -489,9 +492,9 @@ def analyse_from_openalex(alex_df: dict | pd.DataFrame, cli: bool = True, as_pan
     )
 
     if not as_pandas:
-        return applied_df.reset_index().to_dict()
+        return applied_df.reset_index(drop=True).to_dict()
 
-    return applied_df.reset_index()
+    return applied_df.reset_index(drop=True)
 
 
 def analyse_from_doi(
@@ -540,7 +543,7 @@ def analyse_from_dois(
 
     # Convert input if needed
     if isinstance(dois, str):
-        dois = list(dois)
+        dois = [dois]
     if isinstance(dois, pd.Series):
         dois = dois.to_list()
     if not isinstance(dois, list):
@@ -550,6 +553,6 @@ def analyse_from_dois(
     applied = list(map(lambda doi: analyse_from_doi(doi, cli=cli, as_pandas=False), dois))
 
     if as_pandas:
-        return pd.DataFrame(applied).reset_index()
+        return pd.DataFrame(applied).reset_index(drop=True)
 
     return applied
