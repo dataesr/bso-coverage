@@ -371,6 +371,9 @@ def analyse_work(
             else:
                 error = Error.NOT_CRAWLED
 
+        if not cli:
+            conn.close()
+
         # Check DOI
         if state == State.UNDEFINED:
             doi_error, doi_error_data = analyse_doi(doi)
